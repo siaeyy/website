@@ -10,9 +10,7 @@
         post.image_url = "https://picsum.photos/id/" + imageD + "/200";
     }
 
-    function onclick() {
-        console.log("sa")
-    }
+    function onclick() {}
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -36,24 +34,35 @@
 </div>
 
 <style lang="postcss">
-    @reference "tailwindcss";
+    @reference "tailwindcss";    
 
     .card {
         @apply
-            border-2
-            bg-[#dddee4]
-            border-gray-400
-            cursor-pointer
             flex
             flex-col
             justify-between
+            relative
             w-[19rem]
             min-h-[11rem]
-            rounded-3xl
             p-6
+            pt-12
+            mb-6
+            border-2
+            bg-[#ffe187]
+            cursor-pointer
             transition-transform
-            duration-300
-            mb-6;
+            duration-300;
+    }
+
+    .card::before {
+        @apply 
+            absolute
+            top-0
+            left-0
+            w-full
+            h-11.25
+            bg-[#f1d17b]
+            content-[""];
     }
 
     .card:hover {
@@ -63,34 +72,31 @@
 
     .card-title {
         @apply
-            font-[Gloria_Hallelujah]
-            text-lg
-            font-semibold
             mb-2
-            text-[#52525e];
+            text-lg
+            text-[#52525e]
+            font-semibold;
     }
 
     .card-description {
         @apply
-            font-[Gloria_Hallelujah]
-            flex-grow
-            text-gray-600
             mb-4
-            text-sm;
+            flex-grow
+            text-sm
+            text-gray-600;
     }
 
     .card-image {
         @apply
+            mb-4
             w-full
             h-40
-            object-cover
             rounded-xl
-            mb-4;
+            object-cover;
     }
 
     .card-footer {
         @apply
-            font-[Gloria_Hallelujah]
             flex
             justify-between
             text-xs

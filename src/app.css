@@ -10,11 +10,18 @@
 @import "tailwindcss/utilities.css" layer(utilities);
 
 
+@supports (scrollbar-gutter: stable) {
+    html {
+        scrollbar-gutter: stable;
+    }
+}
+
 body {
     @apply
         flex
         flex-col
         items-center
         justify-center
-        bg-[rgb(231,231,231)];
+        bg-[#28282B]
+        font-[Gloria_Hallelujah]!;
 }

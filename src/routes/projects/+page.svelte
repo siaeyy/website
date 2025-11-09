@@ -1,10 +1,12 @@
 <script lang="ts">
-    import BasicContext from "$lib/components/BasicContext.svelte";
+    import ContentPaper from "$lib/components/ContentPaper.svelte";
 </script>
 
-<BasicContext>
-    Projects
-</BasicContext>
+<ContentPaper>
+    <p>
+        hmm
+    </p>
+</ContentPaper>
 
 <style lang="postcss">
     @reference "tailwindcss";

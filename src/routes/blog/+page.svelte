@@ -1,5 +1,6 @@
 <script module lang="ts">
     import BlogPostCard from "$lib/components/BlogPostCard.svelte";
+  import ContentPaper from "$lib/components/ContentPaper.svelte";
     import { mount, onMount } from 'svelte';
 </script>
 
@@ -54,16 +55,12 @@
     function getNextColumn() {
         const positions = getLowestPositions();
   
-        // console.log(positions);
-
         const nully = positions.findIndex(v => v === null);
 
         if (nully !== -1) return nully;
 
         const filtered = positions
             .map((pos, i) => ({ pos, i }));
-
-        // console.log(filtered.length)
 
         if (filtered.length === 0) return 0;
 
@@ -96,10 +93,6 @@
 
             placePost(column, posts[i]);
         }
-
-        console.log(Date.now() - start);
-
-        // console.log();
     }
 
     $effect(() => {
@@ -120,13 +113,19 @@
     });
 </script>
 
-<div id="posts-container" bind:this={container}>
+<div id="posts-container hidden" bind:this={container}>
     {#each Array(columnCount) as _, i}
-        <div class="post-column " bind:this={columns[i]}>
+        <div class="post-column hidden" bind:this={columns[i]}>
             {i}
         </div>
     {/each}
 </div>
+
+<ContentPaper>
+    <p>
+        hmm
+    </p>
+</ContentPaper>
 
 <style lang="postcss">
     @reference "tailwindcss";
