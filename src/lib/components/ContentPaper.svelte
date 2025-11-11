@@ -9,6 +9,7 @@
         const codes = context.querySelectorAll('code');
 
         for (const anchor of anchors) {
+            if (anchor.dataset.blank !== undefined) continue;
             anchor.target = "_blank";
         }
 
@@ -96,8 +97,8 @@
         @apply
             relative
             z-30
-            ml-[10%]
-            mr-[2%]
+            ml-[12%]
+            mr-[4%]
             flex-1
             leading-[28px]!
             text-left
@@ -140,8 +141,8 @@
     .paper-context :global(hr)  {
         @apply
             absolute
-            left-[calc(-100%_/_88_*_10)]
-            w-[calc(100%_/_88_*_100)]
+            left-[calc(-100%_/_70_*_10)]
+            w-[calc(100%_/_84_*_100)]
             h-[2.2px] /* :D? */
             border-0
             filter-[url(#InkBleed)]

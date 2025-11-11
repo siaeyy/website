@@ -25,3 +25,8 @@ body {
         bg-[#28282B]
         font-[Gloria_Hallelujah]!;
 }
+
+pre {
+    @apply
+        font-[Gloria_Hallelujah]!;
+}
