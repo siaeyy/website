@@ -1,4 +1,4 @@
-    const markdownContent = `
+const markdownContent = `
 🎨🌿🐙🍉📚🦋🔥🏔️💡🧩🎧🌊⚡🐾🍀🌱
 
 Me, too. Have a good day. 🙂
@@ -256,11 +256,11 @@ Control Line #2
 
 `;
 
-import { parseMarkdown } from '$lib/helpers/markdown';
-import type { PageServerLoad } from './$types';
+import { parseMarkdown } from "$lib/helpers/markdown";
+import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async () => {
-	return {
-		content: parseMarkdown(markdownContent),
-	};
+    return {
+        content: parseMarkdown(markdownContent),
+    };
 };

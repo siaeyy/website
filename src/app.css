@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Coustard:wght@400;900&family=Gloria+Hallelujah&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Coustard:wght@400;900&family=Gloria+Hallelujah&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Coustard:wght@400;900&family=Gloria+Hallelujah&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chewy&family=Coustard:wght@400;900&family=Gloria+Hallelujah&display=swap");
 
 /* @import "tailwindcss"; */
 
@@ -9,7 +9,6 @@
 /* @import "tailwindcss/preflight.css" layer(base); */
 @import "tailwindcss/utilities.css" layer(utilities);
 
-
 @supports (scrollbar-gutter: stable) {
     html {
         scrollbar-gutter: stable;
@@ -17,8 +16,7 @@
 }
 
 body {
-    @apply
-        flex
+    @apply flex
         flex-col
         items-center
         justify-center
@@ -27,6 +25,5 @@ body {
 }
 
 pre {
-    @apply
-        font-[Gloria_Hallelujah]!;
+    @apply font-[Gloria_Hallelujah]!;
 }

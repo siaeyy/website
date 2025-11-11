@@ -1,5 +1,5 @@
-import { text } from '@sveltejs/kit';
+import { text } from "@sveltejs/kit";
 
 export function GET() {
-	return text("alive");
+    return text("alive");
 }

@@ -1,14 +1,14 @@
 <script module lang="ts">
-    import { writable, type Writable } from 'svelte/store';
-    
+    import { writable, type Writable } from "svelte/store";
+
     export interface DrawStore {
-        color: string
-        thickness: number
-        restore: ImageData[]
-        restoreIndex: number
-        latestColors: string[]
-        undo: () => void
-        redo: () => void
+        color: string;
+        thickness: number;
+        restore: ImageData[];
+        restoreIndex: number;
+        latestColors: string[];
+        undo: () => void;
+        redo: () => void;
     }
 
     export function createDrawStore() {
@@ -30,7 +30,7 @@
         latestColors_.add(color);
 
         if (latestColors_.size > 10) {
-            const [ _, ...rest] = latestColors_;
+            const [_, ...rest] = latestColors_;
             return rest;
         }
 
@@ -55,7 +55,12 @@
 
     function saveState() {
         $store!.restoreIndex++;
-        $store!.restore[$store!.restoreIndex] = renderContext.getImageData(0, 0, canvas.width, canvas.height);
+        $store!.restore[$store!.restoreIndex] = renderContext.getImageData(
+            0,
+            0,
+            canvas.width,
+            canvas.height,
+        );
         $store!.restore = $store!.restore.slice(0, $store!.restoreIndex + 1);
 
         if ($store!.restore.length > 20) {
@@ -70,7 +75,11 @@
             $store!.restoreIndex = -1;
         } else {
             $store!.restoreIndex--;
-            renderContext.putImageData($store!.restore[$store!.restoreIndex], 0, 0);
+            renderContext.putImageData(
+                $store!.restore[$store!.restoreIndex],
+                0,
+                0,
+            );
         }
     }
 
@@ -79,7 +88,11 @@
             return;
         } else {
             $store!.restoreIndex++;
-            renderContext.putImageData($store!.restore[$store!.restoreIndex], 0, 0);
+            renderContext.putImageData(
+                $store!.restore[$store!.restoreIndex],
+                0,
+                0,
+            );
         }
     }
 
@@ -103,10 +116,13 @@
         event.preventDefault();
 
         if (color !== latestColor) {
-            store!.update(v => {
-                v.latestColors = handleLatestColors($store!.latestColors, color);
+            store!.update((v) => {
+                v.latestColors = handleLatestColors(
+                    $store!.latestColors,
+                    color,
+                );
                 return v;
-            })
+            });
 
             latestColor = color;
         }
@@ -146,12 +162,16 @@
     onMount(async () => {
         renderContext = canvas.getContext("2d", { willReadFrequently: true })!;
         renderContext.drawImage = () => {
-	        alert("Slacker, time to actually create something.");
+            alert("Slacker, time to actually create something.");
         };
 
         if ($store!.restoreIndex >= 0) {
             setTimeout(() => {
-                renderContext.putImageData($store!.restore[$store!.restoreIndex], 0, 0);
+                renderContext.putImageData(
+                    $store!.restore[$store!.restoreIndex],
+                    0,
+                    0,
+                );
                 console.log("AAA");
             }, 0);
         }
@@ -173,7 +193,8 @@
     onmousemove={draw}
     onmouseup={stop}
     onmouseout={stop}
-    bind:this={canvas}>
+    bind:this={canvas}
+>
 </canvas>
 
 <style>

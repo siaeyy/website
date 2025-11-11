@@ -3,7 +3,7 @@
 
     const date = new Date(post.update_date ?? post.create_date);
 
-    const imageB = !Math.round(Math.random())
+    const imageB = !Math.round(Math.random());
 
     if (imageB) {
         const imageD = Math.floor(Math.random() * 1084);
@@ -14,17 +14,13 @@
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
-<div role="button" tabindex="0" onclick={onclick} class="card">
+<div role="button" tabindex="0" {onclick} class="card">
     <h2 class="card-title">{post.title}</h2>
 
     <p class="card-description">{post.description}</p>
 
     {#if post.image_url}
-        <img
-            src={post.image_url}
-            alt={post.title}
-            class="card-image"
-        />
+        <img src={post.image_url} alt={post.title} class="card-image" />
     {/if}
 
     <div class="card-footer">
@@ -34,11 +30,10 @@
 </div>
 
 <style lang="postcss">
-    @reference "tailwindcss";    
+    @reference "tailwindcss";
 
     .card {
-        @apply
-            flex
+        @apply flex
             flex-col
             justify-between
             relative
@@ -55,8 +50,7 @@
     }
 
     .card::before {
-        @apply 
-            absolute
+        @apply absolute
             top-0
             left-0
             w-full
@@ -66,29 +60,25 @@
     }
 
     .card:hover {
-        @apply
-            scale-110;
+        @apply scale-110;
     }
 
     .card-title {
-        @apply
-            mb-2
+        @apply mb-2
             text-lg
             text-[#52525e]
             font-semibold;
     }
 
     .card-description {
-        @apply
-            mb-4
+        @apply mb-4
             flex-grow
             text-sm
             text-gray-600;
     }
 
     .card-image {
-        @apply
-            mb-4
+        @apply mb-4
             w-full
             h-40
             rounded-xl
@@ -96,8 +86,7 @@
     }
 
     .card-footer {
-        @apply
-            flex
+        @apply flex
             justify-between
             text-xs
             text-gray-500;

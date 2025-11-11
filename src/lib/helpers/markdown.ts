@@ -5,12 +5,10 @@ const marked = new Marked();
 const renderer = new Renderer({ gfm: true });
 
 renderer.code = ({ text, lang }) => {
-    const code_lang = hljs.getLanguage(lang ?? "")
-        ? lang!
-        : "plaintext";
+    const code_lang = hljs.getLanguage(lang ?? "") ? lang! : "plaintext";
 
     const highlighted = hljs.highlight(text, {
-        language: code_lang
+        language: code_lang,
     }).value;
 
     /*

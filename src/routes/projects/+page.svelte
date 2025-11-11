@@ -3,9 +3,7 @@
 </script>
 
 <ContentPaper>
-    <p>
-        hmm
-    </p>
+    <p>hmm</p>
 </ContentPaper>
 
 <style lang="postcss">

@@ -1,7 +1,7 @@
 <script module lang="ts">
     import BlogPostCard from "$lib/components/BlogPostCard.svelte";
-  import ContentPaper from "$lib/components/ContentPaper.svelte";
-    import { mount, onMount } from 'svelte';
+    import ContentPaper from "$lib/components/ContentPaper.svelte";
+    import { mount, onMount } from "svelte";
 </script>
 
 <script lang="ts">
@@ -23,17 +23,17 @@
         else lastWidth = width;
 
         if (width >= 1024) {
-            columnCount = 3
+            columnCount = 3;
         } else if (width >= 640) {
-            columnCount = 2
+            columnCount = 2;
         } else {
-            columnCount = 1
+            columnCount = 1;
         }
     }
 
     function getPositions(el: Element) {
-        const rect = el.getBoundingClientRect()
-        
+        const rect = el.getBoundingClientRect();
+
         const top = rect.top + window.scrollY;
         const bottom = rect.bottom + window.scrollY;
 
@@ -42,25 +42,24 @@
 
     function getLowestPositions() {
         return columns
-            .filter(v => !!v)
-            .map(v => {
+            .filter((v) => !!v)
+            .map((v) => {
                 const last = v.lastElementChild;
 
                 if (last === null) return null;
 
                 return getPositions(last);
-            })
+            });
     }
 
     function getNextColumn() {
         const positions = getLowestPositions();
-  
-        const nully = positions.findIndex(v => v === null);
+
+        const nully = positions.findIndex((v) => v === null);
 
         if (nully !== -1) return nully;
 
-        const filtered = positions
-            .map((pos, i) => ({ pos, i }));
+        const filtered = positions.map((pos, i) => ({ pos, i }));
 
         if (filtered.length === 0) return 0;
 
@@ -122,17 +121,14 @@
 </div>
 
 <ContentPaper>
-    <p>
-        hmm
-    </p>
+    <p>hmm</p>
 </ContentPaper>
 
 <style lang="postcss">
     @reference "tailwindcss";
 
     #posts-container {
-        @apply
-            w-full
+        @apply w-full
             flex
             justify-center
             flex-row
@@ -141,8 +137,7 @@
     }
 
     .post-column {
-        @apply
-            /* bg-red-600 */
+        @apply /* bg-red-600 */
             mx-3
             basis-64;
     }

@@ -1,12 +1,12 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-    import { createCopyable } from './Copyable.svelte';
+    import { onMount } from "svelte";
+    import { createCopyable } from "./Copyable.svelte";
 
     let context!: HTMLDivElement;
 
     onMount(() => {
-        const anchors = context.querySelectorAll('a');
-        const codes = context.querySelectorAll('code');
+        const anchors = context.querySelectorAll("a");
+        const codes = context.querySelectorAll("code");
 
         for (const anchor of anchors) {
             if (anchor.dataset.blank !== undefined) continue;
@@ -16,7 +16,7 @@
         for (const code of codes) {
             createCopyable(code);
         }
-    })
+    });
 </script>
 
 <div class="paper">
@@ -32,8 +32,7 @@
     @reference "tailwindcss";
 
     .paper {
-        @apply
-            flex
+        @apply flex
             relative
             mt-10
             mx-5
@@ -46,40 +45,35 @@
     }
 
     .paper:before {
-        @apply
-            pb-[round(down,_100%_*_sqrt(2),_28px)]
+        @apply pb-[round(down,_100%_*_sqrt(2),_28px)]
             float-left
             content-[""];
     }
 
     .paper:after {
-        @apply
-            table
+        @apply table
             clear-both
             content-[""];
     }
 
     .paper-texture {
-        @apply
-            absolute
+        @apply absolute
             w-full
             h-full
             filter-[url(#RoughPaper)];
     }
 
     .paper-separator {
-        @apply
-            absolute
+        @apply absolute
             left-[8%]
             h-full
             w-0.5
             bg-red-600
             z-20;
     }
-    
+
     .paper-lines {
-        @apply
-            absolute
+        @apply absolute
             min-w-full
             min-h-full
             z-10;
@@ -94,8 +88,7 @@
     }
 
     .paper-context {
-        @apply
-            relative
+        @apply relative
             z-30
             ml-[12%]
             mr-[4%]
@@ -108,8 +101,7 @@
     }
 
     .paper-context :global(*) {
-        @apply
-            m-0!
+        @apply m-0!
             border-spacing-0
             leading-[28px];
     }
@@ -120,27 +112,23 @@
     }
 
     .paper-context :global(img.emoji) {
-        @apply
-            inline-block
+        @apply inline-block
             align-middle
             w-[calc(1em_*_1.5)];
     }
 
     .paper-context :global(h1 > img.emoji) {
-        @apply
-            align-bottom
+        @apply align-bottom
             my-1!;
     }
 
     .paper-context :global(h3 > img.emoji) {
-        @apply
-            align-bottom
+        @apply align-bottom
             w-7;
     }
 
-    .paper-context :global(hr)  {
-        @apply
-            absolute
+    .paper-context :global(hr) {
+        @apply absolute
             left-[calc(-100%_/_70_*_10)]
             w-[calc(100%_/_84_*_100)]
             h-[2.2px] /* :D? */
@@ -149,7 +137,7 @@
             bg-[#52525e];
     }
 
-    .paper-context :global(hr + hr)  {
+    .paper-context :global(hr + hr) {
         margin-top: 25.8px !important;
         position: relative;
     }
@@ -159,8 +147,7 @@
     }
 
     .paper-context :global(a):hover {
-        @apply
-            italic
+        @apply italic
             delay-1;
     }
 
@@ -190,7 +177,6 @@
     }
 
     .paper-context :global(blockquote > blockquote) {
-
     }
 
     .paper-context :global(pre) {

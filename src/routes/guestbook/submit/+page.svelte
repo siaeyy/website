@@ -1,12 +1,14 @@
 <script lang="ts">
     import { onMount, tick } from "svelte";
-    import CanvasDraw, { createDrawStore } from "$lib/components/CanvasDraw.svelte";
+    import CanvasDraw, {
+        createDrawStore,
+    } from "$lib/components/CanvasDraw.svelte";
     import ContentPaper from "$lib/components/ContentPaper.svelte";
 
     const store = createDrawStore();
 
     $store.color = "#52525e";
-    
+
     let nameInput!: HTMLInputElement;
     let emailInput!: HTMLInputElement;
     let writingInput!: HTMLSpanElement;
@@ -20,14 +22,19 @@
 
     onMount(() => {
         maxThickness = window.innerWidth / 20;
-    })
+    });
 </script>
 
 {#snippet drawingCanvas()}
     <div class="draw-bar text-2xl font-bold">
         <div>
-            <button type="button" class="button" onclick={$store.undo}>⤺</button>
-            <button type="button" class="button transform-[scaleX(-1)]" onclick={$store.redo}>⤺</button>
+            <button type="button" class="button" onclick={$store.undo}>⤺</button
+            >
+            <button
+                type="button"
+                class="button transform-[scaleX(-1)]"
+                onclick={$store.redo}>⤺</button
+            >
         </div>
         <div class="flex justify-between gap-x-[2ch]">
             <button
@@ -35,17 +42,19 @@
                 class="button"
                 onclick={() => {
                     drawingStat = false;
-                    latestImageData = $store.restoreIndex === -1
-                        ? undefined
-                        : $store.restore.at($store.restoreIndex);
-                    
+                    latestImageData =
+                        $store.restoreIndex === -1
+                            ? undefined
+                            : $store.restore.at($store.restoreIndex);
+
                     if (latestImageData === undefined) {
                         writingInput.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'nearest',
+                            behavior: "smooth",
+                            block: "nearest",
                         });
                     }
-                }}>
+                }}
+            >
                 ✓
             </button>
             <button
@@ -57,10 +66,11 @@
                     $store.restoreIndex = -1;
                     console.log($store.restore);
                     writingInput.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'nearest',
+                        behavior: "smooth",
+                        block: "nearest",
                     });
-                }}>
+                }}
+            >
                 ✗
             </button>
         </div>
@@ -68,8 +78,10 @@
     <div class="flex flex-col gap-y-6 w-full">
         <div class="w-full cursor-crosshair">
             <div class="relative aspect-square w-full">
-                <div class="absolute inset-0 border-3 border-[#52525e] pointer-events-none filter-[url(#InkBleed)]"></div>
-                <CanvasDraw store={store} />
+                <div
+                    class="absolute inset-0 border-3 border-[#52525e] pointer-events-none filter-[url(#InkBleed)]"
+                ></div>
+                <CanvasDraw {store} />
             </div>
         </div>
         <input
@@ -77,40 +89,50 @@
             min="1"
             max={maxThickness}
             bind:value={$store.thickness}
-            class="range filter-[url(#InkBleed)]" />
+            class="range filter-[url(#InkBleed)]"
+        />
         <div class="flex">
             <div class="flex justify-center items-center relative w-12 h-12">
-                <div class="absolute w-full h-full border-3 border-[#52525e] filter-[url(#InkBleed)]"></div>
+                <div
+                    class="absolute w-full h-full border-3 border-[#52525e] filter-[url(#InkBleed)]"
+                ></div>
                 <button
                     type="button"
-                    aria-label="{$store.color}"
-                    onclick={() => colorInput.click() }
+                    aria-label={$store.color}
+                    onclick={() => colorInput.click()}
                     class="w-7 h-7 border-0 border-[#52525e] cursor-pointer filter-[url(#InkBleed)]"
-                    style="background-color: {$store.color};">
+                    style="background-color: {$store.color};"
+                >
                 </button>
                 <input
                     type="color"
                     bind:this={colorInput}
                     bind:value={$store.color}
-                    class="absolute top-0 left-0 invisible">
+                    class="absolute top-0 left-0 invisible"
+                />
             </div>
             <div class="flex ml-5! items-center gap-x-2">
-            {#each $store.latestColors.toReversed() as color}
-                <button
-                    type="button"
-                    aria-label="{color}"
-                    onclick={() => store.update(v => { v.color = color; return v; }) }
-                    class="w-7 h-7 border-0 border-[#52525e] cursor-pointer filter-[url(#InkBleed)]"
-                    style="background-color: {color};">
-                </button>
-            {/each}
+                {#each $store.latestColors.toReversed() as color}
+                    <button
+                        type="button"
+                        aria-label={color}
+                        onclick={() =>
+                            store.update((v) => {
+                                v.color = color;
+                                return v;
+                            })}
+                        class="w-7 h-7 border-0 border-[#52525e] cursor-pointer filter-[url(#InkBleed)]"
+                        style="background-color: {color};"
+                    >
+                    </button>
+                {/each}
             </div>
         </div>
     </div>
 {/snippet}
 
 <ContentPaper>
-    <br>
+    <br />
     <div class="relative">
         <h3>Your (nick)name :</h3>
         <input
@@ -120,9 +142,9 @@
             bind:this={nameInput}
         />
     </div>
-    <br>
+    <br />
     <div class="relative">
-        <h3>Your e-mail address : </h3>
+        <h3>Your e-mail address :</h3>
         <h5>(optional, private)</h5>
         <input
             type="email"
@@ -131,23 +153,24 @@
             bind:this={emailInput}
         />
     </div>
-    <br>
+    <br />
     <div class="relative">
         <h3>Message :</h3>
         <span
             class="textarea"
             role="textbox"
             oninput={() => {
-                console.log("a")
+                console.log("a");
                 if (writingInput.textContent === "") {
-                    writingInput.innerHTML === '';
+                    writingInput.innerHTML === "";
                 }
             }}
             bind:this={writingInput}
-            contenteditable >
+            contenteditable
+        >
         </span>
     </div>
-    <br>
+    <br />
     {#if drawingStat}
         <div bind:this={drawingInput}>
             {@render drawingCanvas()}
@@ -160,10 +183,11 @@
                     drawingStat = true;
                     await tick();
                     drawingInput.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center'
-                    })
-                }}>
+                        behavior: "smooth",
+                        block: "center",
+                    });
+                }}
+            >
                 <span class="text-lg">
                     {#if latestImageData !== undefined}
                         &#9998; Edit Drawing
@@ -173,15 +197,15 @@
                 </span>
             </button>
         </div>
-        <br>
+        <br />
         {#if latestImageData !== undefined}
             <div class="relative aspect-square w-full">
-                <CanvasDraw store={store} />
+                <CanvasDraw {store} />
             </div>
         {/if}
     {/if}
-    <br>
-    <br>
+    <br />
+    <br />
 </ContentPaper>
 
 <style lang="postcss">
@@ -190,14 +214,13 @@
     [contenteditable]:focus {
         outline: 0px solid transparent;
     }
-    
+
     ::placeholder {
         @apply text-[#aaa];
     }
 
     .input {
-        @apply
-            h-7
+        @apply h-7
             p-0
             m-0
             border-0
@@ -225,17 +248,16 @@
 
     .button {
         background: none;
-	    color: inherit;
-	    border: none;
-	    padding: 0;
-	    font: inherit;
-	    cursor: pointer;
-	    outline: inherit;
+        color: inherit;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
     }
 
     .draw-bar {
-        @apply
-            flex
+        @apply flex
             flex-row
             items-center
             justify-between

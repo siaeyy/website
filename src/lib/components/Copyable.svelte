@@ -1,10 +1,10 @@
 <script module lang="ts">
     import { mount, type Snippet } from "svelte";
-    import Copyable from './Copyable.svelte';
+    import Copyable from "./Copyable.svelte";
 
     export interface CopyableProps {
-        children: Snippet | HTMLElement
-        clipboard?: string  
+        children: Snippet | HTMLElement;
+        clipboard?: string;
     }
 
     export function createCopyable(target: HTMLElement) {
@@ -26,7 +26,7 @@
 
 <script lang="ts">
     import { onMount } from "svelte";
-    import RisingText from './RisingText.svelte';
+    import RisingText from "./RisingText.svelte";
     import Openmoji from "./Openmoji.svelte";
 
     const { children, clipboard }: CopyableProps = $props();
@@ -38,15 +38,15 @@
     let textSpawn!: HTMLElement;
 
     const onClick = () => {
-        navigator.clipboard.writeText( clipboard ?? content.textContent);
-        
-        mount(RisingText, { 
+        navigator.clipboard.writeText(clipboard ?? content.textContent);
+
+        mount(RisingText, {
             target: textSpawn,
             props: {
                 content: "Copied!",
             },
         });
-    }
+    };
 
     onMount(() => {
         if (!isSnippet) {
@@ -87,7 +87,9 @@
         cursor: pointer;
         opacity: 0;
         visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+        transition:
+            opacity 0.3s ease,
+            visibility 0s linear 0.3s;
     }
 
     .button-wrapper {

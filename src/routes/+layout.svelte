@@ -1,12 +1,12 @@
 <script module lang="ts">
-    import { fly, type FlyParams } from 'svelte/transition';	
-    
+    import { fly, type FlyParams } from "svelte/transition";
+
     const pages = [
         { href: "/blog", text: "Blog" },
         { href: "/about", text: "About" },
         { href: "/projects", text: "Projects" },
         // { href: "/etc", text: "Etc." },
-    ]
+    ];
 
     const pageIn: FlyParams = {
         x: -100,
@@ -22,12 +22,12 @@
 </script>
 
 <script lang="ts">
-	import '../app.css';
+    import "../app.css";
     import "highlight.js/styles/github.css";
 
-    import SvgDefs from '$lib/components/SvgDefs.svelte';
+    import SvgDefs from "$lib/components/SvgDefs.svelte";
 
-	let { children, data } = $props();
+    let { children, data } = $props();
 </script>
 
 <SvgDefs />
@@ -41,25 +41,23 @@
 </div>
 
 {#key data.pathname}
-	<main in:fly={pageIn} out:fly={pageOut}>
-		{@render children()}
-	</main>
+    <main in:fly={pageIn} out:fly={pageOut}>
+        {@render children()}
+    </main>
 {/key}
 
 <style lang="postcss">
     @reference "tailwindcss";
 
     main {
-        @apply
-            flex
+        @apply flex
             justify-center
             w-full
             h-full;
     }
 
     .footer {
-        @apply
-            flex
+        @apply flex
             items-center
             justify-center
             w-full
@@ -73,7 +71,7 @@
     }
 
     .footer::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 65%;
         left: 0;
@@ -84,7 +82,7 @@
     }
 
     .footer::after {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
@@ -95,8 +93,7 @@
     }
 
     .footer-item {
-        @apply
-            font-[Gloria_Hallelujah]
+        @apply font-[Gloria_Hallelujah]
             not-italic
             font-semibold
             text-lg
@@ -110,8 +107,7 @@
     }
 
     .footer-item a:hover {
-        @apply
-            italic
+        @apply italic
             delay-1;
     }
 
@@ -119,8 +115,7 @@
     .footer-item a:visited,
     .footer-item a:link:active,
     .footer-item a:visited:active {
-        @apply
-            outline-none
+        @apply outline-none
             no-underline;
     }
 </style>

@@ -3,15 +3,14 @@ import { postsEntity } from "../entities";
 
 import orm from "../orm";
 
-
 const em = orm.em.fork();
 
 export interface GetPostOptions {
-    search?: string, 
-    orderBy?: "like" | "create_date" | "update_date" | "view",
-    orderIn?: "ASC" | "DESC",
-    offset?: number,
-    limit?: number,
+    search?: string;
+    orderBy?: "like" | "create_date" | "update_date" | "view";
+    orderIn?: "ASC" | "DESC";
+    offset?: number;
+    limit?: number;
 }
 
 export function getPosts(opts?: GetPostOptions) {
@@ -24,7 +23,7 @@ export function getPosts(opts?: GetPostOptions) {
     } = opts ?? {};
 
     const whereOr: FilterQuery<postsEntity>[] = [];
-    
+
     if (search) {
         whereOr.push([
             { title: { $like: `%${search}%` } },
@@ -32,14 +31,14 @@ export function getPosts(opts?: GetPostOptions) {
             { slug: { $like: `%${search}%` } },
         ]);
     }
-    
+
     const where: FilterQuery<postsEntity> = {
-        ...whereOr.length === 0 ? {} : { $or: whereOr },
+        ...(whereOr.length === 0 ? {} : { $or: whereOr }),
     };
 
     const options: FindOptions<postsEntity, never, any, never> = {
-        ...limit === undefined ? {} : { limit },
-        ...offset === undefined ? {} : { offset },
+        ...(limit === undefined ? {} : { limit }),
+        ...(offset === undefined ? {} : { offset }),
         orderBy: {
             [orderBy]: orderIn,
         },

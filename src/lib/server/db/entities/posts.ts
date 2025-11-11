@@ -1,11 +1,15 @@
-import { Entity, PrimaryKey, Property, OneToMany, Collection } from '@mikro-orm/core';
+import {
+    Entity,
+    PrimaryKey,
+    Property,
+    OneToMany,
+    Collection,
+} from "@mikro-orm/core";
 import { PostLike } from "./postLikes";
 import { PostView } from "./postViews";
 
-
-@Entity({ tableName: "posts"})
+@Entity({ tableName: "posts" })
 export class Post {
-
     @PrimaryKey({ type: "integer" })
     id!: number;
 
@@ -27,10 +31,10 @@ export class Post {
     @Property({ type: "timestamp", nullable: true })
     update_date!: Date | null;
 
-    @OneToMany(() => PostLike, postLike => postLike.post)
+    @OneToMany(() => PostLike, (postLike) => postLike.post)
     likes = new Collection<PostLike>(this);
 
-    @OneToMany(() => PostView, postView => postView.post)
+    @OneToMany(() => PostView, (postView) => postView.post)
     views = new Collection<PostView>(this);
 }
 

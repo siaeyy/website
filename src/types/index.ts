@@ -1,4 +1,3 @@
-
 /// <reference path="entities.ts" />
 
-export {}
+export {};

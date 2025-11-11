@@ -1,8 +1,13 @@
-import { parse } from '@twemoji/parser';
+import { parse } from "@twemoji/parser";
 
-export const OPENMOJI_CDN = "https://cdn.jsdelivr.net/npm/openmoji@latest/color/svg";
+export const OPENMOJI_CDN =
+    "https://cdn.jsdelivr.net/npm/openmoji@latest/color/svg";
 
-export const openmojiImg = ({ text, codepoint }: Record<"text" | "codepoint", string>) => `<img class="emoji" alt="${text}" src="${OPENMOJI_CDN}/${codepoint}.svg"/>`;
+export const openmojiImg = ({
+    text,
+    codepoint,
+}: Record<"text" | "codepoint", string>) =>
+    `<img class="emoji" alt="${text}" src="${OPENMOJI_CDN}/${codepoint}.svg"/>`;
 
 export function transformToOpenmojis(text: string) {
     const emojis = parse(text, {

@@ -2,7 +2,7 @@
 
 <script module lang="ts">
     import { onMount } from "svelte";
-    import dedent from 'dedent';
+    import dedent from "dedent";
     import Openmoji from "$lib/components/Openmoji.svelte";
     import ContentPaper from "$lib/components/ContentPaper.svelte";
     import LoadingText from "$lib/components/LoadingText.svelte";
@@ -27,9 +27,9 @@
     `);
 
     interface Social {
-        name: string,
-        href: string,
-        openmoji: string,   
+        name: string;
+        href: string;
+        openmoji: string;
     }
 
     const socials: Social[] = [
@@ -62,9 +62,9 @@
     };
 
     interface Banner {
-        src: string
-        href: string
-        clipboard?: string
+        src: string;
+        href: string;
+        clipboard?: string;
     }
 
     const createBannerClipboard = (banner: Banner) => {
@@ -85,7 +85,7 @@
             href: "https://yesterweb.org/no-to-web3/",
         },
     ];
-    
+
     function calcAge(now: number = Date.now()) {
         const diff = now - bornDate.getTime();
         const age = new Date(diff).getFullYear() - 1970;
@@ -94,8 +94,7 @@
     }
 
     async function getQuote(): Promise<Quote> {
-        return fetch("/api/quote.json")
-            .then(res => res.json())        
+        return fetch("/api/quote.json").then((res) => res.json());
     }
 </script>
 
@@ -105,7 +104,7 @@
     let quote: Quote | undefined;
 
     onMount(() => {
-        getQuote().then(res => quote = res);
+        getQuote().then((res) => (quote = res));
     });
 </script>
 
@@ -117,20 +116,23 @@
 {#snippet banner(banner: Banner)}
     <span class="inline-block w-[88px] h-[28px] align-bottom">
         <span class="absolute">
-            <Copyable clipboard={banner.clipboard ?? createBannerClipboard(banner)}>
+            <Copyable
+                clipboard={banner.clipboard ?? createBannerClipboard(banner)}
+            >
                 {#if banner.href}
                     <a href={banner.href}>
                         <img
                             class="banner"
                             alt={`Banner of "${banner.href}"`}
                             src={banner.src}
-                        >
+                        />
                     </a>
                 {:else}
                     <img
                         class="banner"
                         alt={`Banner of "${banner.href}"`}
-                        src={banner.src}>
+                        src={banner.src}
+                    />
                 {/if}
             </Copyable>
         </span>
@@ -138,20 +140,20 @@
 {/snippet}
 
 <ContentPaper>
-    <br>
+    <br />
     <h2>About Me :</h2>
     <div class="about-container">
         <pre class="about">{shortAbout}</pre>
         <span class="guestbook-link">
-            <br>
+            <br />
             <a href="/guestbook" data-blank>
                 <h3>Guestbook</h3>
             </a>
             <h5>You must check it out!</h5>
         </span>
-        <pre class="about"><br>{about}</pre>
+        <pre class="about"><br />{about}</pre>
     </div>
-    <br>
+    <br />
     <h3>Quote of The Day :</h3>
     <blockquote>
         {#if quote === undefined}
@@ -168,16 +170,16 @@
             </footer>
         {/if}
     </blockquote>
-    <br>
+    <br />
     <h2>Socials :</h2>
     {#each socials as social_}
         {@render social(social_)}
-        <br>
+        <br />
     {/each}
-    <br>
+    <br />
     {@render social(email)}
-    <br>
-    <br>
+    <br />
+    <br />
     <h3>
         My Banner :&nbsp;
         {@render banner({
@@ -190,40 +192,37 @@
         })}
     </h3>
     <p>
-        Copy (hover the mouse on it)<br>
+        Copy (hover the mouse on it)<br />
         and put it onto your website!
     </p>
-    <br>
+    <br />
     <div class="flex flex-wrap gap-x-[28px]">
-    {#each banners as banner_}
-        <div class="h-[56px]">
-            {@render banner(banner_)}
-        </div>
-    {/each}
+        {#each banners as banner_}
+            <div class="h-[56px]">
+                {@render banner(banner_)}
+            </div>
+        {/each}
     </div>
-    <br>
+    <br />
 </ContentPaper>
 
 <style lang="postcss">
     @reference "tailwindcss";
 
     .about {
-        @apply
-            text-inherit
+        @apply text-inherit
             font-[inherit];
     }
 
     .about-container {
-        @apply
-            flex
+        @apply flex
             flex-wrap
             justify-between
             gap-x-8;
     }
 
     .guestbook-link {
-        @apply
-            flex
+        @apply flex
             flex-col
             flex-1
             items-center

@@ -1,23 +1,23 @@
-import { json } from '@sveltejs/kit';
-import Parser from 'rss-parser';
+import { json } from "@sveltejs/kit";
+import Parser from "rss-parser";
 
 const parser: Parser<{ ttl: string }> = new Parser({
     customFields: {
-        feed: ['ttl'],
-    }
+        feed: ["ttl"],
+    },
 });
 
 export interface Quote {
-    author: string
-    content: string
-    link: string 
+    author: string;
+    content: string;
+    link: string;
 }
 
 // ???
 async function getFeed() {
     return fetch("https://www.brainyquote.com/link/quotebr.rss")
-        .then(res => res.text())
-        .then(rss => parser.parseString(rss));
+        .then((res) => res.text())
+        .then((rss) => parser.parseString(rss));
 }
 
 async function getQuote() {
@@ -30,7 +30,7 @@ async function getQuote() {
         link: quote_.link,
     } as Quote;
 
-    if (Object.values(quote).some(v => v === undefined)) {
+    if (Object.values(quote).some((v) => v === undefined)) {
         throw undefined;
     }
 
@@ -47,11 +47,11 @@ async function refreshQuote() {
             author: "siaeyy",
             content: "hmm... i think there is a problem here...",
             link: "",
-        }
+        };
     }
 }
 
-refreshQuote()
+refreshQuote();
 setInterval(refreshQuote, 1440); //enough
 
 export async function GET() {
